@@ -26,4 +26,3 @@ NAME            CHART VERSION	APP VERSION	DESCRIPTION
 $ git checkout <this repo> <path>
 $ helm install --upgrade <flags> <path>/charts/zipkin
 ```
-
