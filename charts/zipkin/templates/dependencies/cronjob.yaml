@@ -21,10 +21,14 @@ spec:
           serviceAccountName: {{ include "zipkin.dependencies.serviceAccountName" . }}
           containers:
             - name: {{ .Chart.Name }}-dependencies
-              image: "{{ .Values.dependencies.image.repository }}:{{ .Values.dependencies.image.repository }}"
+              image: "{{ .Values.dependencies.image.repository }}:{{ .Values.dependencies.image.tag }}"
               imagePullPolicy: {{ .Values.dependencies.image.pullPolicy }}
               resources:
                 {{- toYaml .Values.collector.resources | nindent 16 }}
+              env:
+                {{- with .Values.collector.env }}
+                  {{- toYaml . | nindent 16 }}
+                {{- end }}
           {{- with .Values.collector.nodeSelector }}
           nodeSelector:
             {{- toYaml . | nindent 12 }}
